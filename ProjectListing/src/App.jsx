@@ -1,17 +1,23 @@
-import { useState } from 'react'
-import './App.css'
+import "./App.css";
+import Login from "./components/Login";
+import "./index.css";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
-    <>
-      <h1 className="text-3xl text-cyan-800 font-bold ">
-      Hello
-    </h1>
-    <p className='text-xl mt-4 text-red-600'>create Landing page like <a className='text-blue-400' href='https://www.epic.net/'>epic.net🔥</a> & add a minimalistic login and signup button 💪</p>
-    </>
-  )
+    <div className="App">
+      <Router>
+        {/* <Header /> */}
+        {/* here in react-router-dom v6 Switch is replaced with Routes*/}
+        <Routes>
+          <Route exact path="/" element={<Login />}></Route>
+          {/* <Route path="home" element={<Home />}></Route> */}
+        </Routes>
+      </Router>
+    </div>
+  );
 }
 
-export default App
+export default App;
