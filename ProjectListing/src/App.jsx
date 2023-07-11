@@ -1,16 +1,24 @@
-import { useState } from 'react'
 import './App.css'
 
-import Header from './components/header/Header'
-import Header2 from './components/header/Header2'
+//Components
+// import Header from './components/header/Header'
+// import Footer from './components/footer/Footer'
+// import ProxyContent from './components/proxyContent/ProxyContent'
+
+//Tests
+import Login from './components/login/Login'
+import Register from './components/register/Register'
+import EntryMain from './components/entry/EntryMain'
 
 function App() {
 
   return (
-    <>
-    <Header/>
-      {/* <Header2/> */}
-    </>
+    <div className='app'>
+      {/* <Header/>
+      <ProxyContent/>
+      <Footer/> */}
+      <EntryMain/>
+    </div>
   )
 }
 
