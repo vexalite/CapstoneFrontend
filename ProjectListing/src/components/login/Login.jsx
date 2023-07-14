@@ -1,7 +1,13 @@
 import React, { useState } from 'react'
-import "./Login.css"
+import { Link, useNavigate } from 'react-router-dom'
+
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 export default function Login() {
+
+  const navigate = useNavigate()
 
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
@@ -14,7 +20,7 @@ export default function Login() {
     console.log("___clicked___", username, "___pass___", password)
 
     try {
-      fetch('http://localhost:3001/signin', {
+      fetch('https://projectlisting-98nl.onrender.com/user/signin', {
         method: 'POST',
         body: JSON.stringify({ username, password }),
         headers: {
@@ -28,12 +34,21 @@ export default function Login() {
         })
         .then((data) => {
           console.log("___res data___", data)
-          const token = data.token;
-          setAccessToken(token)
-          
-          const currentDate = new Date();
-          localStorage.setItem('accessToken', token);
-          localStorage.setItem('accessTokenCreationDate', currentDate.toISOString());      
+          if (data.token) {
+            console.log("___token exists__", data.token)
+            const token = data.token;
+            setAccessToken(token)
+
+            const currentDate = new Date();
+            localStorage.setItem('accessToken', token);
+            localStorage.setItem('accessTokenCreationDate', currentDate.toISOString());
+
+            navigate('/dashboard')
+          }
+          else {
+            console.log("___token dosen't exist___")
+            toast(data.message)
+          }
         })
         .catch((err) => {
           console.log("__error__", err)
@@ -47,9 +62,11 @@ export default function Login() {
 
 
   return (
-    <div className='login'>
-        <div className="max-w-md w-full p-8">
-        <h1 className="text-3xl mb-4">Login Page</h1>
+    <div className='register flex flex-col items-center'>
+      <ToastContainer/>
+      <h1 className="text-5xl block pb-2 text-center">Login Page</h1>
+      <h1 className="text-lg mb-4 pb-4 block text-center">Login using username</h1>
+      <div className="max-w-md w-full p-8">
         <form onSubmit={handleLogin}>
           <div className="mb-4">
             <label htmlFor="username" className="block mb-2">
@@ -79,10 +96,12 @@ export default function Login() {
             type="submit"
             className="w-full bg-secondary py-2 px-4 rounded hover:bg-secondary-dark"
           >
-            Login
+            Log in
           </button>
-          {accessToken && <div className="mt-4 break-all">Access Token: {accessToken}</div>}
+          <div className='block pb-2 text-center'>Don't have an account? <Link to='/entry/register' className='pr-1 text-secondary-dark'>Register</Link></div>
+          {/* {accessToken && <div className="mt-4 break-all">Access Token: {accessToken}</div>} */}
         </form>
+
       </div>
     </div>
   )

@@ -1,11 +1,24 @@
 import React, { useState } from 'react'
+import { useNavigate, Link } from 'react-router-dom'
 
 export default function ChooseUser() {
-
+    const navigate = useNavigate()
     const [chooseUser, setChooseUser] = useState(null)
 
     const handleInput = (inputId) => {
         setChooseUser(inputId)
+    }
+
+    const handleClick = () => {
+        if(chooseUser === 1){
+            navigate('/entry/register')
+        }
+        else if(chooseUser === 2){
+            navigate('/entry/compsignup')
+        }
+        else{
+            alert("please choose between Developer or Company")
+        }
     }
 
     return (
@@ -30,7 +43,7 @@ export default function ChooseUser() {
                 <div className={`px-4 py-2 mx-4 my-2 border-2 border-black rounded  ${chooseUser === 2 ? 'border-secondary' : ''}`} onClick={() => handleInput(2)}>
                     <div className='flex justify-between'>
                         <div>
-                            Sign up as a Developer
+                            Sign up as an Organisation
                             <div className='text-sm'>
                                 Something to say...
                             </div>
@@ -40,9 +53,11 @@ export default function ChooseUser() {
                         </div>
                     </div>
                 </div>
-                <button className='btn px-4 py-2 mx-4 mt-4 bg-secondary rounded'> submit </button>
+                <button onClick={() => handleClick()} className='btn px-4 py-2 mx-4 mt-4 bg-secondary rounded'> submit </button>
             </div>
-            <div className='block pb-2 text-center'>Already have an account? <span className='text-secondary-dark'>Log in</span></div>
+            <div className='block pb-2 text-center'>Already have an account? Log in
+                <div><Link to='/entry/login' className='pr-1 text-secondary-dark'>As a Developer</Link>|<Link to='/entry/compsignin' className='pl-1 text-secondary-dark'>As an Organisation</Link></div>
+            </div>
         </div>
     )
 }

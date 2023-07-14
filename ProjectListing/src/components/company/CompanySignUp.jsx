@@ -1,11 +1,8 @@
 import React, { useState } from 'react'
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom'
 
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+export default function CompanySignUp() {
 
-
-export default function Register() {
   const navigate = useNavigate()
 
   const [username, setUsername] = useState("")
@@ -23,7 +20,7 @@ export default function Register() {
 
 
     try {
-      fetch('https://projectlisting-98nl.onrender.com/user/signup', {
+      fetch('https://projectlisting-98nl.onrender.com/company/signup', {
         method: 'POST',
         body: JSON.stringify({ username, password, name }),
         headers: {
@@ -46,20 +43,17 @@ export default function Register() {
             localStorage.setItem('accessToken', token);
             localStorage.setItem('accessTokenCreationDate', currentDate.toISOString());
 
-            navigate('/entry/devreg')
+            navigate('/entry/compreg')
 
           }
           else {
             console.log("___token dosen't exist___")
-            // alert(data.message)
-            toast(data.message);
+            alert(data.message)
           }
         })
         .catch((err) => {
           console.log("__error__", err)
         })
-
-        
 
     } catch (error) {
     }
@@ -67,8 +61,8 @@ export default function Register() {
 
   return (
     <div className='register flex flex-col items-center'>
-      <ToastContainer />
-      <h1 className="text-5xl block pb-2 text-center">Create a user account</h1>
+
+      <h1 className="text-5xl block pb-2 text-center">Create a company account</h1>
       <h1 className="text-lg mb-4 pb-4 block text-center">Register using name or contact</h1>
       <div className="max-w-md w-full p-8">
         <form onSubmit={handleSignIn}>
@@ -114,9 +108,7 @@ export default function Register() {
           >
             Register
           </button>
-          <div className='block pb-2 text-center'>Already have an account? <Link to='/entry/login' className='pr-1 text-secondary-dark'>Log in</Link></div>
-
-          {/* {accessToken && <div className="mt-4 break-all">Access Token: {accessToken}</div>} */}
+          <div className='block pb-2 text-center'>Already have an account? <Link to='/entry/compsignin' className='pr-1 text-secondary-dark'>Log in</Link></div>
         </form>
       </div>
     </div>
