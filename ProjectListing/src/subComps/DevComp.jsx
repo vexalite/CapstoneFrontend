@@ -13,7 +13,7 @@ export default function DevComp() {
       <div className="flex-1 flex flex-col">
         <NavBar activePage={activePage} onPageChange={handlePageChange} />
         <div className="flex-1 flex">
-          <div className="w-[350px] bg-gray-200">
+          <div className="w-[350px] bg-red-200">
             {/* Sidebar Content */}
           </div>
           <div className="flex-1 bg-red-500">

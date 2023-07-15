@@ -1,6 +1,9 @@
 import React, { useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 export default function ChooseUser() {
     const navigate = useNavigate()
     const [chooseUser, setChooseUser] = useState(null)
@@ -10,19 +13,20 @@ export default function ChooseUser() {
     }
 
     const handleClick = () => {
-        if(chooseUser === 1){
+        if (chooseUser === 1) {
             navigate('/entry/register')
         }
-        else if(chooseUser === 2){
+        else if (chooseUser === 2) {
             navigate('/entry/compsignup')
         }
-        else{
-            alert("please choose between Developer or Company")
+        else {
+            toast("please choose between Developer or Company")
         }
     }
 
     return (
         <div className='choose-user flex flex-col justify-center'>
+            <ToastContainer />
             <h1 className='p-5 m-4 h-5'></h1>
             <h1 className="text-5xl block pb-2 text-center">Create an account</h1>
             <h1 className="text-lg mb-4 pb-4 block text-center">Are you a developer or a company</h1>
