@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom';
+import { API_LINK } from '../../../constants';
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -23,7 +24,7 @@ export default function Register() {
 
 
     try {
-      fetch('https://projectlisting-98nl.onrender.com/user/signup', {
+      fetch( `${API_LINK}/user/signup`, {
         method: 'POST',
         body: JSON.stringify({ username, password, name }),
         headers: {

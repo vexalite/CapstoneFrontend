@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
+import { API_LINK } from '../../../constants'
 
 export default function CompanySignUp() {
 
@@ -20,7 +21,7 @@ export default function CompanySignUp() {
 
 
     try {
-      fetch('https://projectlisting-98nl.onrender.com/company/signup', {
+      fetch(`${API_LINK}/company/signup`, {
         method: 'POST',
         body: JSON.stringify({ username, password, name }),
         headers: {

@@ -20,7 +20,7 @@ export default function CompanyRegister() {
 
 
         try {
-            fetch('https://projectlisting-98nl.onrender.com/o/api/company', {
+            fetch(`${API_LINK}/o/api/company`, {
                 method: 'POST',
                 body: JSON.stringify({
                     "company_name": companyName,

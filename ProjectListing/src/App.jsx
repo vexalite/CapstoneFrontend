@@ -12,8 +12,7 @@ import SkillList from './components/skillList/SkillList'
 import EntryMain from './components/entry/EntryMain'
 import LandingPage from './components/landingPage/LandingPage'
 import Dashboard from './components/dashboard/Dashboard'
-
-import DevComp from './subComps/DevComp'
+import CompanyHomePage from './components/CompanyHome/CompanyHomePage'
 
 function App() {
 
@@ -27,6 +26,10 @@ function App() {
         <Route
         path="/dashboard"
         element={isAuthenticated ? <Dashboard /> : <Navigate to='/entry' replace/>}
+      />
+        <Route
+        path="/companyhome"
+        element={isAuthenticated ? <CompanyHomePage /> : <Navigate to='/entry' replace/>}
       />
       </Routes>
     </BrowserRouter>

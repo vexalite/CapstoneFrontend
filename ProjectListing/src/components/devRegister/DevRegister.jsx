@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { API_LINK } from '../../../constants';
 
 export default function DevRegister() {
 
@@ -24,7 +25,8 @@ export default function DevRegister() {
     ];
 
 
-    const [devName, setDevName] = useState("")
+    const [devFName, setDevFName] = useState("")
+    const [devLName, setDevLName] = useState("")
     const [bio, setBio] = useState("")
     const [background, setBackground] = useState("")
     const [portfolioLink, setPortfolioLink] = useState("")
@@ -47,18 +49,11 @@ export default function DevRegister() {
         event.preventDefault()
 
 
-        // console.log("__devname  ", devName)
-        // console.log("__bio  ", bio)
-        // console.log("background  ", background)
-        // console.log("portfolio  ", portfolioLink)
-        // console.log("__address  ", address)
-        // console.log("__phone  ", phone)
-        // console.log("__email  ", email)
-        // console.log("__Skill  ", selectedSkills)
 
         console.log(
             {
-                "dev_name": devName,
+                "dev_fname": devFName,
+                "dev_lname": devLName,
                 "skills": selectedSkills,
                 "bio": bio,
                 "background": background,
@@ -74,10 +69,11 @@ export default function DevRegister() {
         if (token) {
             console.log("token exists")
             try {
-                fetch('https://projectlisting-98nl.onrender.com/u/api/dev', {
+                fetch(`${API_LINK}/u/api/dev`, {
                     method: 'POST',
                     body: JSON.stringify({
-                        "dev_name": devName,
+                        "dev_fname": devFName,
+                        "dev_lname": devLName,
                         "skills": selectedSkills,
                         "bio": bio,
                         "background": background,
@@ -98,7 +94,7 @@ export default function DevRegister() {
                     })
                     .then((data) => {
                         console.log("___data___", data)
-                        if(data.message){
+                        if (data.message) {
                             toast(data.message)
                         }
                     })
@@ -118,6 +114,9 @@ export default function DevRegister() {
 
     }
 
+
+
+
     return (
         <div className='register flex flex-col items-center'>
             <ToastContainer />
@@ -127,14 +126,38 @@ export default function DevRegister() {
                 <form onSubmit={handleSubmit}>
 
                     <div className="mb-4">
+                        <label htmlFor="image" className="block mb-2">
+                            Image:
+                        </label>
+                        <input
+                            type="file"
+                            id="image"
+                            // onChange={(e) => handleImageUpload(e.target.files[0])}
+                            className="w-full px-4 py-2 rounded border-2 border-gray-500 focus:border-secondary focus:outline-none"
+                        />
+                    </div>
+
+                    <div className="mb-4">
                         <label htmlFor="devName" className="block mb-2">
                             Developer Name:
                         </label>
                         <input
                             type="text"
-                            id="devName"
-                            value={devName}
-                            onChange={(e) => setDevName(e.target.value)}
+                            id="devFName"
+                            value={devFName}
+                            onChange={(e) => setDevFName(e.target.value)}
+                            className="w-full px-4 py-2 rounded border-2 border-gray-500 focus:border-secondary focus:outline-none"
+                        />
+                    </div>
+                    <div className="mb-4">
+                        <label htmlFor="devName" className="block mb-2">
+                            Developer Name:
+                        </label>
+                        <input
+                            type="text"
+                            id="devLName"
+                            value={devLName}
+                            onChange={(e) => setDevLName(e.target.value)}
                             className="w-full px-4 py-2 rounded border-2 border-gray-500 focus:border-secondary focus:outline-none"
                         />
                     </div>

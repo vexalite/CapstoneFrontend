@@ -5,7 +5,7 @@ export default function DevloperCard() {
         <div className='w-[300px] h-[350px] bg-blue-300 mt-4 ml-4 rounded-2xl'>
             <div className='h-[270px] bg-blue-500 m-3 rounded-xl'>
                 <div className='h-[70px] flex justify-between items-center'>
-                    <div className='border-2 border-solid m-3 py-2 px-4 rounded-xl'>Job description</div>
+                    <div className='border-2 border-solid m-3 py-2 px-4 rounded-xl'>24 mar, 2222</div>
                     <div className="h-10 w-10 rounded-full bg-gray-300 mx-3"></div>
                 </div>
                 <div className='h-[90px] flex justify-between items-center'>
@@ -22,7 +22,7 @@ export default function DevloperCard() {
 
             </div>
             <div className='h-[40px] m-3 rounded-xl flex justify-between items-center px-2'>
-                <div>Hello</div>
+                <div>Rating</div>
                 <div className='border-2 border-solid py-2 px-4 rounded-xl text-black bg-blue-400 hover:bg-blue-500 hover:border-blue-500 hover:text-white'>Details</div>
             </div>
         </div>

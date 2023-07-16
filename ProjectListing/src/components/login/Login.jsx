@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import { API_LINK } from '../../../constants';
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -20,7 +21,7 @@ export default function Login() {
     console.log("___clicked___", username, "___pass___", password)
 
     try {
-      fetch('https://projectlisting-98nl.onrender.com/user/signin', {
+      fetch(`${API_LINK}/user/signin`, {
         method: 'POST',
         body: JSON.stringify({ username, password }),
         headers: {
@@ -36,6 +37,7 @@ export default function Login() {
           console.log("___res data___", data)
           if (data.token) {
             console.log("___token exists__", data.token)
+            console.log("___Dev existance___", data.dev)
             const token = data.token;
             setAccessToken(token)
 
@@ -43,7 +45,12 @@ export default function Login() {
             localStorage.setItem('accessToken', token);
             localStorage.setItem('accessTokenCreationDate', currentDate.toISOString());
 
-            navigate('/dashboard')
+            if((data.dev) == 'false' ){
+              // console.log("Dev dosent exist")
+              navigate('/entry/devreg')
+            }else{
+              navigate('/dashboard')
+            }
           }
           else {
             console.log("___token dosen't exist___")
@@ -63,11 +70,11 @@ export default function Login() {
 
   return (
     <div className='register flex flex-col items-center'>
-      <ToastContainer/>
+      <ToastContainer />
       <h1 className="text-5xl block pb-2 text-center">Login Page</h1>
       <h1 className="text-lg mb-4 pb-4 block text-center">Login using username</h1>
       <div className="max-w-md w-full p-8">
-        <form onSubmit={handleLogin}>
+        <form onSubmit={handleLogin} className="w-full">
           <div className="mb-4">
             <label htmlFor="username" className="block mb-2">
               Username:
@@ -77,7 +84,7 @@ export default function Login() {
               id="username"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-              className="w-full px-4 py-2 rounded border-2 border-gray-500 focus:border-secondary focus:outline-none "
+              className="w-full px-4 py-2 rounded border-2 border-gray-500 focus:border-secondary focus:outline-none"
             />
           </div>
           <div className="mb-4">
@@ -92,15 +99,16 @@ export default function Login() {
               className="w-full px-4 py-2 rounded border-2 border-gray-500 focus:border-secondary focus:outline-none"
             />
           </div>
-          <button
-            type="submit"
-            className="w-full bg-secondary py-2 px-4 rounded hover:bg-secondary-dark"
-          >
+          
+          <button type="submit" className="w-full bg-secondary py-2 px-4 rounded hover:bg-secondary-dark">
             Log in
           </button>
-          <div className='block pb-2 text-center'>Don't have an account? <Link to='/entry/register' className='pr-1 text-secondary-dark'>Register</Link></div>
+          <div className="block pb-2 text-center">
+            Don't have an account? <Link to="/entry/register" className="pr-1 text-secondary-dark">Register</Link>
+          </div>
           {/* {accessToken && <div className="mt-4 break-all">Access Token: {accessToken}</div>} */}
         </form>
+
 
       </div>
     </div>

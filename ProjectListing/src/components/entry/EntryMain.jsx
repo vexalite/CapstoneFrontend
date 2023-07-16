@@ -10,6 +10,7 @@ import DevRegister from '../devRegister/DevRegister'
 import CompanySignIn from '../company/CompanySignIn'
 import CompanySignUp from '../company/CompanySignUp'
 import UserForm from '../auth/Auth'
+import DevImgRegister from '../devRegister/DevImgRegister'
 
 export default function EntryMain() {
 
@@ -31,7 +32,8 @@ export default function EntryMain() {
           <Route exact path="/" element={<ChooseUser />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/devreg" element={<DevRegister />} />
+          {/* <Route path="/devreg" element={<DevRegister />} /> */}
+          <Route path="/devreg" element={<DevImgRegister />} />
           <Route path="/compreg" element={<CompanyRegister />} />
           <Route path="/compsignin" element={<CompanySignIn />} />
           <Route path="/compsignup" element={<CompanySignUp />} />
