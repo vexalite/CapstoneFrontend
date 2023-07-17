@@ -1,6 +1,6 @@
 import { useState } from "react";
-import Login from "../login/Login";
-import Register from "../register/Register";
+import Login from "../entry/Login";
+import Register from "../entry/Register";
 const FormComponentMap = new Map();
 
 // const Login = ()=>{

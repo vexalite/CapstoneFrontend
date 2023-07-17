@@ -5,6 +5,8 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { API_LINK } from '../../../constants';
 
+
+
 export default function DevRegister() {
 
     const skillsData = [
@@ -27,6 +29,7 @@ export default function DevRegister() {
 
     const [devFName, setDevFName] = useState("")
     const [devLName, setDevLName] = useState("")
+    const [price, setPrice] = useState(0)
     const [bio, setBio] = useState("")
     const [background, setBackground] = useState("")
     const [portfolioLink, setPortfolioLink] = useState("")
@@ -35,6 +38,8 @@ export default function DevRegister() {
     const [email, setEmail] = useState("")
 
     const [selectedSkills, setSelectedSkills] = useState([]);
+
+    const [file, setFile] = useState(null);
 
     const toggleSkillSelection = (skill) => {
         const isSelected = selectedSkills.includes(skill);
@@ -46,74 +51,61 @@ export default function DevRegister() {
     };
 
     const handleSubmit = (event) => {
-        event.preventDefault()
+        event.preventDefault();
+        // console.log(file)
 
+        const formData = new FormData();
+        formData.append('dev_fname', devFName);
+        formData.append('dev_lname', devLName);
+        formData.append('price', parseInt(price));
+        formData.append('bio', bio);
+        formData.append('background', background);
+        formData.append('portfolio_link', portfolioLink);
+        formData.append('address', address);
+        formData.append('phone', phone);
+        formData.append('email', email);
 
+        selectedSkills.forEach((skill) => {
+            formData.append('skills[]', skill);
+        });
 
-        console.log(
-            {
-                "dev_fname": devFName,
-                "dev_lname": devLName,
-                "skills": selectedSkills,
-                "bio": bio,
-                "background": background,
-                "portfolio_link": portfolioLink,
-                "address": address,
-                "phone": phone,
-                "email": email
-            }
-        )
+        formData.append('image', file)
+
+        console.log(file)
+
+        const jsonPayload = JSON.stringify(Object.fromEntries(formData));
+
+        console.log('JSON payload:', jsonPayload);
+
 
         const token = localStorage.getItem('accessToken')
 
-        if (token) {
-            console.log("token exists")
-            try {
-                fetch(`${API_LINK}/u/api/dev`, {
-                    method: 'POST',
-                    body: JSON.stringify({
-                        "dev_fname": devFName,
-                        "dev_lname": devLName,
-                        "skills": selectedSkills,
-                        "bio": bio,
-                        "background": background,
-                        "portfolio_link": portfolioLink,
-                        "address": address,
-                        "phone": phone,
-                        "email": email
-                    }),
-                    headers: {
-                        'Authorization': `Bearer ${token}`,
-                        'Content-Type': 'application/json',
-                    },
-                })
-                    .then((response) => {
 
-                        console.log("___response___", response)
-                        return response.json()
-                    })
-                    .then((data) => {
-                        console.log("___data___", data)
-                        if (data.message) {
-                            toast(data.message)
-                        }
-                    })
-                    .catch((err) => {
-                        console.log("__error__", err)
-                    })
-            }
-            catch (err) {
-                console.log("___error___", err)
-            }
-        }
-        else {
-            console.log("token dosent exists")
-            toast("Please login first")
-        }
+        fetch(`${API_LINK}/u/api/dev`, {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                // 'Content-Type': 'application/json',
+            },
+        })
+            .then((response) => {
+
+                console.log("___response___", response)
+                return response.json()
+            })
+            .then((data) => {
+                console.log("___data___", data)
+                if (data.message) {
+                    toast(data.message)
+                }
+            })
+            .catch((err) => {
+                console.log("__error__", err)
+            })
 
 
     }
-
 
 
 
@@ -123,7 +115,7 @@ export default function DevRegister() {
             <h1 className="text-3xl block pb-2 text-center md:text-5xl">Create a Developer account</h1>
             <h1 className="text-lg mb-4 pb-4 block text-center">Register using your information</h1>
             <div className="max-w-md w-full p-8">
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={(event) => handleSubmit(event)}>
 
                     <div className="mb-4">
                         <label htmlFor="image" className="block mb-2">
@@ -132,14 +124,14 @@ export default function DevRegister() {
                         <input
                             type="file"
                             id="image"
-                            // onChange={(e) => handleImageUpload(e.target.files[0])}
+                            onChange={(e) => setFile(e.target.files[0])}
                             className="w-full px-4 py-2 rounded border-2 border-gray-500 focus:border-secondary focus:outline-none"
                         />
                     </div>
 
                     <div className="mb-4">
-                        <label htmlFor="devName" className="block mb-2">
-                            Developer Name:
+                        <label htmlFor="devFName" className="block mb-2">
+                            Developer First Name:
                         </label>
                         <input
                             type="text"
@@ -150,14 +142,26 @@ export default function DevRegister() {
                         />
                     </div>
                     <div className="mb-4">
-                        <label htmlFor="devName" className="block mb-2">
-                            Developer Name:
+                        <label htmlFor="devLName" className="block mb-2">
+                            Developer Last Name:
                         </label>
                         <input
                             type="text"
                             id="devLName"
                             value={devLName}
                             onChange={(e) => setDevLName(e.target.value)}
+                            className="w-full px-4 py-2 rounded border-2 border-gray-500 focus:border-secondary focus:outline-none"
+                        />
+                    </div>
+                    <div className="mb-4">
+                        <label htmlFor="devLName" className="block mb-2">
+                            Cost of working:
+                        </label>
+                        <input
+                            type="number"
+                            id="price"
+                            value={price}
+                            onChange={(e) => setPrice(e.target.value)}
                             className="w-full px-4 py-2 rounded border-2 border-gray-500 focus:border-secondary focus:outline-none"
                         />
                     </div>
@@ -204,7 +208,7 @@ export default function DevRegister() {
                             Phone:
                         </label>
                         <input
-                            type="text"
+                            type="phone"
                             id="phone"
                             value={phone}
                             onChange={(e) => setPhone(e.target.value)}

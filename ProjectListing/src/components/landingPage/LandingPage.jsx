@@ -1,8 +1,8 @@
 import React from 'react'
 
-import Header from '../header/Header'
-import ProxyContent from '../proxyContent/ProxyContent'
-import Footer from '../footer/Footer'
+import Header from './Header'
+import ProxyContent from './ProxyContent'
+import Footer from './Footer'
 
 export default function LandingPage() {
   return (

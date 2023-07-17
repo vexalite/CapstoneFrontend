@@ -6,7 +6,6 @@ import { BrowserRouter, Routes, Route, useNavigate, Navigate} from 'react-router
 // import Footer from './components/footer/Footer'
 // import ProxyContent from './components/proxyContent/ProxyContent'
 
-import SkillList from './components/skillList/SkillList'
 
 //Tests
 import EntryMain from './components/entry/EntryMain'

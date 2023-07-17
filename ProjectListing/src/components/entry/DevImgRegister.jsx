@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
 import { API_LINK } from '../../../constants';
+import axios from 'axios';
+
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -40,43 +42,64 @@ export default function DevImgRegister() {
 
         const formData = new FormData(e.target);
         // formData.append('skills', JSON.stringify(selectedSkills));
+        // formData.append('skills',(selectedSkills));
 
-        const selectedSkills = ["JavaScript", "React"];
+        formData.set('price', parseInt(10));
 
-        // selectedSkills.forEach((skill, index) => {
-        //     formData.append(`skills[${index}]`, skill);
-        // });
+        selectedSkills.forEach((skill) => {
+            formData.append('skills[]', skill);
+          });
+
+        for (const value of formData.values()) {
+        console.log(value, typeof value);
+        }
+
 
         const formDataEntries = Array.from(formData.entries());
-
         console.log(formDataEntries);
-        console.log("___Access token___", )
-
+        
         const token = localStorage.getItem('accessToken')
 
+        // axios.post(`${API_LINK}/u/api/dev`, formData, {
+        //     headers: {
+        //       Authorization: `Bearer ${token}`,
+        //       'Content-Type': 'multipart/form-data', // No need to set Content-Type explicitly for FormData
+        //     },
+        //   })
+        //     .then((response) => {
+        //       console.log("___response___", response.data);
+        //       if (response.data.message) {
+        //         toast(response.data.message);
+        //       }
+        //     })
+        //     .catch((error) => {
+        //       console.log("__error__", error);
+        //     });
 
-        fetch(`${API_LINK}/u/api/dev`, {
-            method: 'POST',
-            body: formData,
-            headers: {
-                'Authorization': `Bearer ${token}`,
-                // 'Content-Type': 'application/json',
-            },
-        })
-            .then((response) => {
 
-                console.log("___response___", response)
-                return response.json()
-            })
-            .then((data) => {
-                console.log("___data___", data)
-                if (data.message) {
-                    toast(data.message)
-                }
-            })
-            .catch((err) => {
-                console.log("__error__", err)
-            })
+
+        // fetch(`${API_LINK}/u/api/dev`, {
+        //     method: 'POST',
+        //     body: formData,
+        //     headers: {
+        //         'Authorization': `Bearer ${token}`,
+        //         // 'Content-Type': 'application/json',
+        //     },
+        // })
+        //     .then((response) => {
+
+        //         console.log("___response___", response)
+        //         return response.json()
+        //     })
+        //     .then((data) => {
+        //         console.log("___data___", data)
+        //         if (data.message) {
+        //             toast(data.message)
+        //         }
+        //     })
+        //     .catch((err) => {
+        //         console.log("__error__", err)
+        //     })
     };
     return (
         <div>
