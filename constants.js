@@ -1,1 +1,0 @@
-export const API_LINK = "https://build-b84g.onrender.com"
