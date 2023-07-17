@@ -1,48 +1,42 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+import { API_LINK } from '../../../constants';
+
 import ProjectCard from '../cards/ProjectCard'
+import ProjectCardData from '../cards/ProjectCardData'
 
 export default function ProjectCards() {
+  const [projectData, setProjectData] = useState([]);
+
+  useEffect(() => {
+    fetchProjectData();
+  }, []);
+
+  const fetchProjectData = () => {
+    fetch(`${API_LINK}/api/project`)
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        setProjectData(data.data);
+      })
+      .catch((error) => console.log(error));
+  };
   return (
     <>
       <h1 className="text-3xl">
         Projects
       </h1>
-      <div className='bg-gray-300 h-full flex flex-wrap justify-center p-4 item-top'>
-        <div className='w-[300px] h-[350px] bg-blue-300 mt-4 ml-4 rounded-2xl'>
-          <div className='h-[270px] bg-blue-500 m-3 rounded-xl'>
-            <div className='h-[70px] flex justify-between items-center'>
-              <div className='bg-white m-3 py-2 px-4 rounded-full'>24 mar, 2023</div>
-              <div className="h-10 w-10 rounded-full bg-gray-300 mx-3"></div>
-            </div>
-            <div className='h-[30px] mx-3 flex items-end text-sm'>Company name</div>
-            <div className='h-[60px] flex justify-between items-center'>
-              <div className='h-[60px] text-2xl mx-3 font-semibold'>Project Name here</div>
-              <div>
-                <div className="h-12 w-12 rounded-full bg-gray-300 mx-3"></div>
-              </div>
-            </div>
-            <div className='h-[110px] p-1 flex flex-wrap justify-start items-center'>
-              <div className='m-1 px-4 py-2 bg-blue-200 rounded-full text-sm'>Tech 1</div>
-              <div className='m-1 px-4 py-2 bg-blue-200 rounded-full text-sm'>Tech 1</div>
-              <div className='m-1 px-4 py-2 bg-blue-200 rounded-full text-sm'>Tech 1</div>
-              <div className='m-1 px-4 py-2 bg-blue-200 rounded-full text-sm'>Tech 1</div>
-            </div>
-          </div>
-          <div className='h-[40px] m-3 rounded-xl flex justify-between items-center px-2'>
-            <div>
-              <div className='font-semibold'>$250/hr</div>
-              <div className='text-xs'>Virar, maharastra</div>
-            </div>
-            <div className='bg-blue-700 text-white py-2 px-4 rounded-xl '>Details</div>
-          </div>
-        </div>
-        <ProjectCard/>
-        <ProjectCard/>
-        <ProjectCard/>
-        <ProjectCard/>
-        <ProjectCard/>
-        <ProjectCard/>
-        <ProjectCard/>
+      <div className=' h-full flex flex-wrap justify-center p-4 item-top'>
+        {projectData.slice(0, 8).map((projectData, index) => (
+          <ProjectCardData key={index} projectData={projectData}/>
+        ))}
+        {/* <ProjectCardData />
+        <ProjectCard />
+        <ProjectCard />
+        <ProjectCard />
+        <ProjectCard />
+        <ProjectCard />
+        <ProjectCard />
+        <ProjectCard /> */}
       </div>
     </>
   )

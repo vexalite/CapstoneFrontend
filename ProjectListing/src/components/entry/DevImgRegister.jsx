@@ -10,20 +10,20 @@ import 'react-toastify/dist/ReactToastify.css';
 export default function DevImgRegister() {
 
     const skillsData = [
-        'JavaScript',
-        'Python',
-        'Java',
-        'HTML',
-        'CSS',
-        'React',
-        'Node.js',
-        'SQL',
-        'Git',
-        'Agile',
-        'AWS',
-        'Docker',
-        'Testing',
-        'UI/UX Design',
+        'javaScript',
+        'python',
+        'java',
+        'html',
+        'css',
+        'react',
+        'node.js',
+        'sql',
+        'git',
+        'agile',
+        'aws',
+        'docker',
+        'testing',
+        'ui/ux design',
     ];
 
     const [selectedSkills, setSelectedSkills] = useState([]);
@@ -50,9 +50,6 @@ export default function DevImgRegister() {
             formData.append('skills[]', skill);
           });
 
-        for (const value of formData.values()) {
-        console.log(value, typeof value);
-        }
 
 
         const formDataEntries = Array.from(formData.entries());

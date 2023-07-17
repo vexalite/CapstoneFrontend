@@ -92,10 +92,10 @@ export default function CompanyHomePage() {
                     </div>
                     <div className="flex-1 flex flex-row m-4 pt-1">
                         {/* <DevloperViewCompany/> */}
-                        <DevloperDetails devData={devData}/>
+                        {/* <DevloperDetails devData={devData}/> */}
                         {/* <DevloperDetails devID="02dd2014-faa4-48f4-aa24-80279970c87a"/> */}
                         {/* {activeCard} */}
-                        {/* <CompanyDetails /> */}
+                        <CompanyDetails />
                         {/* <BusinessDetails {...companyData} /> */}
                         {/* <Projectdetails projectData={projectData}/> */}
                     </div>

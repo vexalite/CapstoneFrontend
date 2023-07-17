@@ -18,14 +18,14 @@ export default function Dashboard() {
   }
   
   // Page change
-  const [activePage, setActivePage] = useState('developers');
+  const [activePage, setActivePage] = useState('projects');
   
   const handlePageChange = (page) => {
     setActivePage(page);
   };
   
   // let activeCard;
-  // let activeFilter;
+  let activeFilter;
   
   const handleDevDetails = ({ devData }) => {
     console.log(devData)
@@ -51,10 +51,13 @@ export default function Dashboard() {
   useEffect(() => {
     if (activePage === 'developers') {
       setActiveCard(<DevCards handleDevDetails={handleDevDetails} />);
+      activeFilter = <DevFilter />
     } else if (activePage === 'companies') {
       setActiveCard(<CompCards />);
+      activeFilter = "";
     } else if (activePage === 'projects') {
       setActiveCard(<ProjectCards />);
+      activeFilter = "";
     }
   }, [activePage]);
 
@@ -65,7 +68,7 @@ export default function Dashboard() {
         <NavBar activePage={activePage} onPageChange={handlePageChange} />
         <div className="flex-1 flex">
           <div className="w-[350px] h-[900px] rounded-b-xl bg-gray-200 p-8 flex flex-col overflow-y-scroll">
-            {/* {activeFilter} */}
+            {activeFilter}
           </div>
           <div className="flex-1 flex flex-col m-4 pt-1">
             {activeCard}

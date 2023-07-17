@@ -25,8 +25,8 @@ export default function DevCards({handleDevDetails}) {
         <>
             <h1 className="text-3xl pb-4 mx-3">Developers</h1>
             {/* <button onClick={()=>handleDevDetails({})}>Click</button> */}
-            <div className="bg-gray-300 h-full flex flex-wrap justify-center p-4 item-top rounded-lg">
-                {devsData.slice(0,8).map((devData, index) => (
+            <div className="h-full flex flex-wrap justify-center p-4 item-top rounded-lg">
+                {devsData.slice(0,6).map((devData, index) => (
                     <DevloperCardData key={index} devData={devData} handleDevDetails={handleDevDetails}/>
                 ))}
             </div>

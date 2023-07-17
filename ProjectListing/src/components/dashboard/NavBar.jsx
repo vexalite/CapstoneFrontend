@@ -4,7 +4,7 @@ export default function NavBar({ activePage, onPageChange }) {
 
     return (
 
-        <nav className='w-full bg-indigo-950 h-[80px]'>
+        <nav className='w-full bg-black h-[80px]'>
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex items-center justify-between h-16">
                     <div className="flex items-center">
@@ -13,18 +13,18 @@ export default function NavBar({ activePage, onPageChange }) {
                         </div>
                     </div>
                     <div className="hidden sm:block">
-                        <div className="flex space-x-4 border-indigo-950">
-                            <div className={`flex-auto py-1 px-4 text-white font-semibold text-lg border-b-2 hover:border-blue-300 ${activePage === 'developers' ? 'text-blue-300 border-blue-300': 'border-indigo-950'}`}
-                            onClick={() => onPageChange('developers')}>
-                                Developers
-                            </div>
-                            <div className={`flex-auto py-1 px-4 text-white font-semibold text-lg border-b-2 hover:border-blue-300 ${activePage === 'projects' ? 'text-blue-300 border-blue-300' : 'border-indigo-950'}`}
+                        <div className="flex space-x-4 border-black">
+                            <div className={`flex-auto py-1 px-4 text-white font-semibold text-lg border-b-2 hover:border-white ${activePage === 'projects' ? 'text-white border-white' : 'border-black'}`}
                             onClick={() => onPageChange('projects')}>
                                 Project
                             </div>
-                            <div className={`flex-auto py-1 px-4 text-white font-semibold text-lg border-b-2 hover:border-blue-300 ${activePage === 'companies' ? 'text-blue-300 border-blue-300': 'border-indigo-950'}`}
+                            <div className={`flex-auto py-1 px-4 text-white font-semibold text-lg border-b-2 hover:border-white ${activePage === 'companies' ? 'text-white border-white': 'border-black'}`}
                             onClick={() => onPageChange('companies')}>
                                 Company
+                            </div>
+                            <div className={`flex-auto py-1 px-4 text-white font-semibold text-lg border-b-2 hover:border-white ${activePage === 'developers' ? 'text-white border-white': 'border-black'}`}
+                            onClick={() => onPageChange('developers')}>
+                                Developers
                             </div>
 
                         </div>

@@ -4,11 +4,16 @@ import { API_LINK } from '../../../constants';
 
 export default function CompanyDetails() {
 
+    const [file, setFile] = useState(null);
+
     const handleSubmit = (e) => {
         e.preventDefault();
 
         const token = localStorage.getItem("accessToken");
         const formData = new FormData(e.target);
+
+        formData.append('image', file)
+
 
         fetch(`${API_LINK}/o/api/company`, {
             method: "POST",
@@ -89,11 +94,11 @@ export default function CompanyDetails() {
                                 Company Logo:
                             </label>
                             <input
-                                type="file"
-                                id="companyLogo"
-                                name="company_logo"
-                                className="w-full px-4 py-2 rounded border border-gray-300 focus:border-blue-500 focus:outline-none"
-                            />
+                            type="file"
+                            id="image"
+                            onChange={(e) => setFile(e.target.files[0])}
+                            className="w-full px-4 py-2 rounded border-2 border-gray-500 focus:border-secondary focus:outline-none"
+                        />
                         </div>
                         <div className="mb-4">
                             <label htmlFor="location" className="block mb-2">

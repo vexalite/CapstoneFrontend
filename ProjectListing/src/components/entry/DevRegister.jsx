@@ -77,6 +77,9 @@ export default function DevRegister() {
 
         console.log('JSON payload:', jsonPayload);
 
+        formData.set('price', 300)
+
+
 
         const token = localStorage.getItem('accessToken')
 

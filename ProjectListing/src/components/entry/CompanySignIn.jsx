@@ -41,7 +41,7 @@ export default function CompanySignIn() {
             localStorage.setItem('accessTokenCreationDate', currentDate.toISOString());
 
             // navigate('/entry/compreg')
-            navigate('/dashboard')
+            navigate('/companyhome')
           }
           else {
             console.log("___token dosen't exist___")
